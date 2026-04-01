@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KasiKollect</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: sans-serif; background: #f5f5f0; display: flex; flex-direction: column; min-height: 100vh; }
+
+    .topbar { background: #f0ede8; height: 48px; display: flex; align-items: center; padding: 0 24px; border-bottom: 1px solid #ddd; }
+    .topbar-title { font-size: 15px; font-weight: 500; color: #1a1a1a; }
+    .topbar-sub { font-size: 12px; color: #888; margin-left: 12px; }
+
+    .layout { display: flex; flex: 1; }
+
+    .sidebar { width: 200px; background: #f0ede8; border-right: 1px solid #ddd; padding: 20px 14px; display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+    .sidebar-title { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
+    .sidebar a { font-size: 13px; color: #555; padding: 8px 10px; border-radius: 7px; text-decoration: none; display: block; }
+    .sidebar a:hover { background: #e0f5ee; color: #085041; }
+    .sidebar a.active { background: #e0f5ee; color: #085041; font-weight: 500; }
+
+    .main { flex: 1; padding: 32px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-title">KasiKollect</span>
+  <span class="topbar-sub">Community reporting system</span>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-title">Navigation</div>
+    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+    <a href="{% url 'report' %}" class="{% if request.resolver_match.url_name == 'report' %}active{% endif %}">Report issue</a>
+    <a href="{% url 'tracker' %}" class="{% if request.resolver_match.url_name == 'tracker' %}active{% endif %}">Track complaint</a>
+    <a href="{% url 'schedule' %}" class="{% if request.resolver_match.url_name == 'schedule' %}active{% endif %}">View schedule</a>
+  </div>
+
+  <div class="main">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+</body>
+</html>

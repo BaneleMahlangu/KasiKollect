@@ -1,0 +1,95 @@
+{% extends 'interaction/base.html' %}
+
+{% block content %}
+<style>
+  .bc { font-size: 12px; color: #888; margin-bottom: 16px; }
+  .bc span.active { background: #e0f5ee; color: #1D9E75; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+  .prog { display: flex; gap: 6px; margin-bottom: 20px; }
+  .pd { height: 5px; flex: 1; border-radius: 3px; background: #e0e0e0; }
+  .pd.done { background: #1D9E75; }
+  .pd.active { background: #5DCAA5; }
+  .page-title { font-size: 20px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
+  .page-sub { font-size: 13px; color: #888; margin-bottom: 24px; }
+  .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .opt { border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; cursor: pointer; background: white; }
+  .opt:hover { border-color: #1D9E75; }
+  .opt.selected { border: 2px solid #1D9E75; background: #e0f5ee; }
+  .opt-icon { width: 44px; height: 44px; border-radius: 10px; background: #f0ede8; display: flex; align-items: center; justify-content: center; }
+  .opt.selected .opt-icon { background: #9FE1CB; }
+  .opt-label { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+  .opt.selected .opt-label { color: #085041; }
+  .opt-desc { font-size: 12px; color: #888; }
+  .opt.selected .opt-desc { color: #0F6E56; }
+  .btn-row { display: flex; justify-content: flex-end; }
+  .next-btn { background: #1D9E75; border: none; border-radius: 10px; color: #085041; padding: 12px 28px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; }
+  .next-btn:hover { background: #0F6E56; color: white; }
+</style>
+
+<div class="bc">
+  Home &rsaquo; Report &rsaquo; <span class="active">Issue type</span> &rsaquo; Location &rsaquo; Submit
+</div>
+
+<div class="prog">
+  <div class="pd done"></div>
+  <div class="pd active"></div>
+  <div class="pd"></div>
+  <div class="pd"></div>
+</div>
+
+<div class="page-title">What is the issue?</div>
+<div class="page-sub">Select one option below</div>
+
+<div class="options">
+  <div class="opt selected" onclick="selectOpt(this)">
+    <div class="opt-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="7" width="16" height="13" rx="2" stroke="#0F6E56" stroke-width="1.5" fill="none"/>
+        <path d="M8 7V6a4 4 0 018 0v1" stroke="#0F6E56" stroke-width="1.5" fill="none"/>
+        <path d="M8 12h8M8 16h5" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="opt-label">Missed collection</div>
+    <div class="opt-desc">Bin not collected on scheduled day</div>
+  </div>
+
+  <div class="opt" onclick="selectOpt(this)">
+    <div class="opt-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 19l4-8 4 4 3-5 5 9H4z" stroke="#888" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        <circle cx="17" cy="6" r="2.5" stroke="#888" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="opt-label">Illegal dumping</div>
+    <div class="opt-desc">Waste dumped in open area</div>
+  </div>
+
+  <div class="opt" onclick="selectOpt(this)">
+    <div class="opt-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="5" y="8" width="14" height="11" rx="2" stroke="#888" stroke-width="1.5" fill="none"/>
+        <path d="M8 8V7a4 4 0 018 0v1" stroke="#888" stroke-width="1.5" fill="none"/>
+        <path d="M12 4V2M16 5l1-1M8 5L7 4" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="opt-label">Overflowing bin</div>
+    <div class="opt-desc">Public bin is full and overflowing</div>
+  </div>
+</div>
+
+<div class="btn-row">
+  <a href="{% url 'tracker' %}" class="next-btn">Next — add location &rsaquo;</a>
+</div>
+
+<script>
+  function selectOpt(el) {
+    document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    el.querySelectorAll('svg path, svg rect, svg circle').forEach(s => {
+      s.setAttribute('stroke', '#0F6E56');
+    });
+    document.querySelectorAll('.opt:not(.selected) svg path, .opt:not(.selected) svg rect, .opt:not(.selected) svg circle').forEach(s => {
+      s.setAttribute('stroke', '#888');
+    });
+  }
+</script>
+{% endblock %}

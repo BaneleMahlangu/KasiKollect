@@ -1,0 +1,106 @@
+{% extends 'interaction/base.html' %}
+
+{% block content %}
+<style>
+  .page-title { font-size: 20px; font-weight: 500; color: #1a1a1a; margin-bottom: 20px; }
+  .two-col { display: grid; grid-template-columns: 1fr 280px; gap: 24px; }
+  .ref-card { background: #f0ede8; border-radius: 12px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .ref-id { font-size: 20px; font-weight: 500; color: #1a1a1a; }
+  .ref-label { font-size: 11px; color: #888; margin-bottom: 2px; }
+  .ref-date { font-size: 11px; color: #aaa; }
+  .ref-badge { background: #e0f5ee; color: #0F6E56; font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; }
+  .section-label { font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 14px; }
+  .stage-row { display: flex; align-items: flex-start; gap: 14px; }
+  .stage-left { display: flex; flex-direction: column; align-items: center; }
+  .sc { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #e0e0e0; background: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sc.done { background: #1D9E75; border-color: #1D9E75; }
+  .sc.curr { border-color: #1D9E75; background: #e0f5ee; }
+  .ck { width: 10px; height: 6px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg) translate(1px,-1px); }
+  .dc { width: 10px; height: 10px; background: #1D9E75; border-radius: 50%; }
+  .sline { width: 2px; min-height: 24px; background: #e0e0e0; margin: 3px 0; }
+  .sline.done { background: #1D9E75; }
+  .sname { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+  .sname.muted { color: #bbb; font-weight: 400; }
+  .sdesc { font-size: 12px; color: #888; margin-top: 2px; }
+  .stime { font-size: 12px; color: #0F6E56; font-weight: 500; margin-top: 2px; }
+  .notif-strip { background: #e0f5ee; border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #085041; margin-top: 16px; }
+  .truck-card { border: 2px solid #1D9E75; border-radius: 12px; padding: 14px; background: #e0f5ee; }
+  .truck-title { font-size: 13px; font-weight: 500; color: #085041; margin-bottom: 10px; }
+  .truck-map { background: #9FE1CB; border-radius: 10px; height: 120px; position: relative; overflow: hidden; margin-bottom: 8px; }
+  .troad { position: absolute; width: 100%; height: 3px; background: white; opacity: 0.5; top: 50%; }
+  .ttruck { width: 16px; height: 16px; background: #085041; border-radius: 50%; border: 3px solid white; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+  .tdest { width: 12px; height: 12px; background: #D85A30; border-radius: 50%; border: 3px solid white; position: absolute; right: 18%; top: 50%; transform: translateY(-50%); }
+  .truck-eta { font-size: 12px; color: #085041; text-align: center; font-weight: 500; }
+  .issue-card { background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 14px; margin-top: 14px; }
+  .issue-row { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid #f0ede8; }
+  .issue-row:last-child { border-bottom: none; }
+  .issue-key { color: #888; }
+  .issue-val { color: #1a1a1a; font-weight: 500; }
+</style>
+
+<div class="page-title">Complaint tracker</div>
+
+<div class="ref-card">
+  <div>
+    <div class="ref-label">Reference number</div>
+    <div class="ref-id">#4821</div>
+    <div class="ref-date">Submitted 28 Mar 2026</div>
+  </div>
+  <div class="ref-badge">In progress</div>
+</div>
+
+<div class="two-col">
+  <div>
+    <div class="section-label">Complaint status</div>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div class="stage-row">
+        <div class="stage-left"><div class="sc done"><div class="ck"></div></div><div class="sline done"></div></div>
+        <div style="padding-top:2px;padding-bottom:12px;">
+          <div class="sname">Received</div>
+          <div class="sdesc">28 Mar, 9:43am — Report logged successfully</div>
+        </div>
+      </div>
+      <div class="stage-row">
+        <div class="stage-left"><div class="sc done"><div class="ck"></div></div><div class="sline done"></div></div>
+        <div style="padding-top:2px;padding-bottom:12px;">
+          <div class="sname">Assigned</div>
+          <div class="sdesc">28 Mar, 11:00am — Soshanguve ward team notified</div>
+        </div>
+      </div>
+      <div class="stage-row">
+        <div class="stage-left"><div class="sc curr"><div class="dc"></div></div><div class="sline"></div></div>
+        <div style="padding-top:2px;padding-bottom:12px;">
+          <div class="sname">In progress</div>
+          <div class="sdesc">Collection truck dispatched to your area</div>
+          <div class="stime">Expected within 2 hours</div>
+        </div>
+      </div>
+      <div class="stage-row">
+        <div class="stage-left"><div class="sc"></div></div>
+        <div style="padding-top:2px;">
+          <div class="sname muted">Resolved</div>
+          <div class="sdesc">Awaiting completion</div>
+        </div>
+      </div>
+    </div>
+    <div class="notif-strip">You will receive a notification when this issue is resolved.</div>
+  </div>
+
+  <div>
+    <div class="truck-card">
+      <div class="truck-title">Live truck location</div>
+      <div class="truck-map">
+        <div class="troad"></div>
+        <div class="ttruck"></div>
+        <div class="tdest"></div>
+      </div>
+      <div class="truck-eta">Estimated arrival: 11:45am</div>
+    </div>
+    <div class="issue-card">
+      <div class="issue-row"><span class="issue-key">Issue type</span><span class="issue-val">Missed collection</span></div>
+      <div class="issue-row"><span class="issue-key">Area</span><span class="issue-val">Soshanguve Block X</span></div>
+      <div class="issue-row"><span class="issue-key">Reported</span><span class="issue-val">28 Mar 2026</span></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

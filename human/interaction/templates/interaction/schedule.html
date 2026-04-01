@@ -1,0 +1,85 @@
+{% extends 'interaction/base.html' %}
+
+{% block content %}
+<style>
+  .page-title { font-size: 20px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
+  .page-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .search-box { border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px 16px; font-size: 13px; background: white; display: flex; align-items: center; gap: 10px; margin-bottom: 24px; width: 360px; }
+  .search-text { color: #1a1a1a; font-weight: 500; }
+  .section-label { font-size: 13px; font-weight: 500; color: #888; margin-bottom: 12px; }
+  .day-list { display: flex; flex-direction: column; gap: 10px; max-width: 600px; }
+  .day-card { background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; }
+  .day-card.next { border: 2px solid #1D9E75; background: #e0f5ee; }
+  .day-date-box { width: 52px; height: 56px; border-radius: 10px; background: #f0ede8; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+  .day-card.next .day-date-box { background: #9FE1CB; }
+  .day-day { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+  .day-card.next .day-day { color: #0F6E56; }
+  .day-num { font-size: 22px; font-weight: 500; color: #1a1a1a; line-height: 1; }
+  .day-card.next .day-num { color: #085041; }
+  .day-detail { flex: 1; }
+  .day-name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+  .day-card.next .day-name { color: #085041; }
+  .day-type { font-size: 12px; color: #888; margin-top: 3px; }
+  .day-card.next .day-type { color: #0F6E56; }
+  .next-badge { background: #1D9E75; color: #e0f5ee; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
+</style>
+
+<div class="page-title">Collection schedule</div>
+<div class="page-sub">Upcoming dates for your area</div>
+
+<div class="search-box">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <circle cx="6.5" cy="6.5" r="4.5" stroke="#888" stroke-width="1.5"/>
+    <path d="M10 10l3 3" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <span class="search-text">Soshanguve Block X</span>
+</div>
+
+<div class="section-label">Upcoming collections</div>
+
+<div class="day-list">
+  <div class="day-card next">
+    <div class="day-date-box"><div class="day-day">Thu</div><div class="day-num">3</div></div>
+    <div class="day-detail">
+      <div class="day-name">Thursday 3 April</div>
+      <div class="day-type">General waste — all areas</div>
+    </div>
+    <div class="next-badge">Next</div>
+  </div>
+  <div class="day-card">
+    <div class="day-date-box"><div class="day-day">Thu</div><div class="day-num">10</div></div>
+    <div class="day-detail">
+      <div class="day-name">Thursday 10 April</div>
+      <div class="day-type">General waste — all areas</div>
+    </div>
+  </div>
+  <div class="day-card">
+    <div class="day-date-box"><div class="day-day">Thu</div><div class="day-num">17</div></div>
+    <div class="day-detail">
+      <div class="day-name">Thursday 17 April</div>
+      <div class="day-type">Recycling + general waste</div>
+    </div>
+  </div>
+  <div class="day-card">
+    <div class="day-date-box"><div class="day-day">Thu</div><div class="day-num">24</div></div>
+    <div class="day-detail">
+      <div class="day-name">Thursday 24 April</div>
+      <div class="day-type">General waste — all areas</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+```
+
+---
+
+## Step 10 — Run the server
+
+In your VS Code terminal, make sure you are inside the `human` folder (where `manage.py` is), then run:
+```
+python manage.py runserver
+```
+
+Then open your browser and go to:
+```
+http://127.0.0.1:8000
